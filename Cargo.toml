@@ -4,6 +4,13 @@ version = "0.1.0"
 edition = "2021"
 authors = ["H-Chris233"]
 
+[workspace]
+members = ["os","kernel"]
+
+[[bin]]
+name = "kernel"
+path = "src/kernel.rs"
+
 [profile.dev]
 panic = "abort"
 
@@ -11,4 +18,7 @@ panic = "abort"
 panic = "abort"
 
 [dependencies]
-bootloader = "0.9"
+bootloader = "0.11.9"
+
+[build-dependencies]
+bootloader = "0.11.9"
