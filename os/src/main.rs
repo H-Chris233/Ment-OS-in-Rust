@@ -1,7 +1,7 @@
-
+#![no_std]
 
 fn main() {
-    println!("Running the kernel...");
+    println("Running the kernel...");
 }
 
 

@@ -5,20 +5,20 @@ use bootloader_api::{BootInfo, BootloaderConfig};
 
 
 #[unsafe(no_mangle)]
-pub extern "C" fn _start(boot_info: &'static mut BootInfo) -> ! {
+pub fn start(boot_info: &'static mut BootInfo) -> ! {
     println("Hello World!");
-    let boot_config = boot_info.boot_config();
+    /*let boot_config = boot_info.boot_config();
     match boot_config {
-        Some(BootloaderConfig::Bios(_)) => {
+        Some(BootloaderConfig::BiosBoot) => {
             // 处理 BIOS 启动信息
             println("Booted via BIOS");
         }
-        Some(BootloaderConfig::Uefi(_)) => {
+        Some(BootloaderConfig::UefiBoot) => {
             // 处理 UEFI 启动信息
             println("Booted via UEFI");
         }
         None => panic!("Unsupported bootloader configuration"),
-    }
+    }*/
 
     loop {}
     
@@ -61,7 +61,7 @@ fn print_byte(byte: u8) {
     }
 }
 
-bootloader_api::entry_point!(_start);
+bootloader_api::entry_point!(start);
 
 #[panic_handler]
 fn panic(_info: &PanicInfo) -> ! {

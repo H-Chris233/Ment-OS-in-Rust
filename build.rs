@@ -1,5 +1,5 @@
 // build.rs
-use bootloader::{BootImageConfig, BiosBoot, UefiBoot};
+use bootloader::{BootConfig, BiosBoot, UefiBoot};
 use std::path::PathBuf;
 use std::process::Command;
 
