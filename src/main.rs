@@ -1,25 +1,12 @@
 #![no_std]
 #![no_main]
 use core::panic::PanicInfo;
-use bootloader_api::{BootInfo, BootloaderConfig};
 
 
-#[unsafe(no_mangle)]
-pub fn start(boot_info: &'static mut BootInfo) -> ! {
+#[no_mangle]
+pub extern "C" fn _start() -> ! {
     println("Hello World!");
-    /*let boot_config = boot_info.boot_config();
-    match boot_config {
-        Some(BootloaderConfig::BiosBoot) => {
-            // 处理 BIOS 启动信息
-            println("Booted via BIOS");
-        }
-        Some(BootloaderConfig::UefiBoot) => {
-            // 处理 UEFI 启动信息
-            println("Booted via UEFI");
-        }
-        None => panic!("Unsupported bootloader configuration"),
-    }*/
-
+    println("This is a simple kernel written in Rust.");
     loop {}
     
 }
@@ -61,7 +48,6 @@ fn print_byte(byte: u8) {
     }
 }
 
-bootloader_api::entry_point!(start);
 
 #[panic_handler]
 fn panic(_info: &PanicInfo) -> ! {
