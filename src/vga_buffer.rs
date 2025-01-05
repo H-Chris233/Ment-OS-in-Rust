@@ -100,14 +100,16 @@ impl Writer {
             self.buffer.chars[row][col] = blank;
         }
     }
-    pub fn print_something(){
-        let mut writer = Writer {
-            column_position: 0,
-            color_code: ColorCode::new(Color::Yellow, Color::Black),
-            buffer: unsafe { &mut *(0xb8000 as *mut Buffer) },
-        };
-        writer.write_string("Hello World!");
-    }
+    
+}
+
+pub fn print_something(){
+    let mut writer = Writer {
+        column_position: 0,
+        color_code: ColorCode::new(Color::Yellow, Color::Black),
+        buffer: unsafe { &mut *(0xb8000 as *mut Buffer) },
+    };
+    writer.write_string("Hello World!  哈哈哈");
 }
 
 
