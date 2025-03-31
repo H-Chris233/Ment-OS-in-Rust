@@ -1,1 +1,1 @@
-Nothing,just a shit-like operation system build with shit code.
+Nothing.Shit code.
