@@ -1,0 +1,318 @@
+   Compiling alloc v0.0.0 (/home/engine/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/alloc)
+   Compiling volatile v0.4.6
+   Compiling bitflags v2.9.4
+   Compiling bit_field v0.10.3
+   Compiling cfg-if v0.1.10
+   Compiling crossbeam-utils v0.7.2
+   Compiling x86_64 v0.14.13
+   Compiling maybe-uninit v2.0.0
+   Compiling spin v0.9.8
+   Compiling bitflags v1.3.2
+   Compiling lazy_static v1.5.0
+   Compiling crossbeam-queue v0.2.3
+   Compiling pc-keyboard v0.7.0
+   Compiling spin v0.5.2
+   Compiling bootloader v0.9.29
+   Compiling volatile v0.2.7
+   Compiling pic8259 v0.10.4
+   Compiling uart_16550 v0.2.19
+   Compiling ment_os v0.1.0 (/home/engine/project)
+error: cannot find attribute `test_framework` in this scope
+ --> src/lib.rs:4:4
+  |
+4 | #![test_framework(crate::test_framework)]
+  |    ^^^^^^^^^^^^^^
+  |
+  = note: `test_framework` is in scope, but it is a function, not an attribute
+
+error[E0425]: cannot find value `WRITER` in this scope
+   --> src/vga_buffer.rs:155:9
+    |
+155 |         WRITER.lock().write_fmt(args).unwrap();
+    |         ^^^^^^ not found in this scope
+
+error[E0425]: cannot find value `SERIAL1` in this scope
+  --> src/serial.rs:19:9
+   |
+19 |         SERIAL1.lock().write_fmt(args).expect("Printing to serial failed");
+   |         ^^^^^^^ not found in this scope
+
+error[E0425]: cannot find value `GDT` in this scope
+  --> src/gdt.rs:41:5
+   |
+41 |     GDT.0.load();
+   |     ^^^ not found in this scope
+
+error[E0425]: cannot find value `GDT` in this scope
+  --> src/gdt.rs:43:21
+   |
+43 |         CS::set_reg(GDT.1.code_selector);
+   |                     ^^^ not found in this scope
+
+error[E0425]: cannot find value `GDT` in this scope
+  --> src/gdt.rs:44:18
+   |
+44 |         load_tss(GDT.1.tss_selector);
+   |                  ^^^ not found in this scope
+
+error[E0425]: cannot find value `IDT` in this scope
+  --> src/interrupts.rs:49:5
+   |
+49 |     IDT.load();
+   |     ^^^ not found in this scope
+
+error[E0425]: cannot find value `KEYBOARD` in this scope
+  --> src/keyboard.rs:14:24
+   |
+14 |     let mut keyboard = KEYBOARD.lock();
+   |                        ^^^^^^^^ not found in this scope
+
+error: macro-expanded `macro_export` macros from the current crate cannot be referred to by absolute paths
+  --> src/serial.rs:33:21
+   |
+33 |     ($fmt:expr) => ($crate::serial_print!(concat!($fmt, "\n")));
+   |                     ^^^^^^^^^^^^^^^^^^^^
+   |
+  ::: src/lib.rs:56:9
+   |
+56 |         serial_println!("[ok]");
+   |         ----------------------- in this macro invocation
+   |
+   = warning: this was previously accepted by the compiler but is being phased out; it will become a hard error in a future release!
+   = note: for more information, see issue #52234 <https://github.com/rust-lang/rust/issues/52234>
+note: the macro is defined here
+  --> src/serial.rs:24:1
+   |
+24 | / macro_rules! serial_print {
+25 | |     ($($arg:tt)*) => {
+26 | |         $crate::serial::_print(format_args!($($arg)*));
+27 | |     };
+28 | | }
+   | |_^
+   = note: `#[deny(macro_expanded_macro_exports_accessed_by_absolute_paths)]` (part of `#[deny(future_incompatible)]`) on by default
+   = note: this error originates in the macro `serial_println` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+error: macro-expanded `macro_export` macros from the current crate cannot be referred to by absolute paths
+  --> src/serial.rs:34:34
+   |
+34 |     ($fmt:expr, $($arg:tt)*) => ($crate::serial_print!(
+   |                                  ^^^^^^^^^^^^^^^^^^^^
+   |
+  ::: src/lib.rs:61:5
+   |
+61 |     serial_println!("Running {} tests", tests.len());
+   |     ------------------------------------------------ in this macro invocation
+   |
+   = warning: this was previously accepted by the compiler but is being phased out; it will become a hard error in a future release!
+   = note: for more information, see issue #52234 <https://github.com/rust-lang/rust/issues/52234>
+note: the macro is defined here
+  --> src/serial.rs:24:1
+   |
+24 | / macro_rules! serial_print {
+25 | |     ($($arg:tt)*) => {
+26 | |         $crate::serial::_print(format_args!($($arg)*));
+27 | |     };
+28 | | }
+   | |_^
+   = note: this error originates in the macro `serial_println` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+error: macro-expanded `macro_export` macros from the current crate cannot be referred to by absolute paths
+   --> src/interrupts.rs:3:13
+    |
+  3 | use crate::{println, print};
+    |             ^^^^^^^
+    |
+    = warning: this was previously accepted by the compiler but is being phased out; it will become a hard error in a future release!
+    = note: for more information, see issue #52234 <https://github.com/rust-lang/rust/issues/52234>
+note: the macro is defined here
+   --> src/vga_buffer.rs:144:1
+    |
+144 | / macro_rules! println {
+145 | |     () => ($crate::print!("\n"));
+146 | |     ($($arg:tt)*) => ($crate::print!("{}\n", format_args!($($arg)*)));
+147 | | }
+    | |_^
+
+error: macro-expanded `macro_export` macros from the current crate cannot be referred to by absolute paths
+   --> src/interrupts.rs:3:22
+    |
+  3 | use crate::{println, print};
+    |                      ^^^^^
+    |
+    = warning: this was previously accepted by the compiler but is being phased out; it will become a hard error in a future release!
+    = note: for more information, see issue #52234 <https://github.com/rust-lang/rust/issues/52234>
+note: the macro is defined here
+   --> src/vga_buffer.rs:139:1
+    |
+139 | / macro_rules! print {
+140 | |     ($($arg:tt)*) => ($crate::vga_buffer::_print(format_args!($($arg)*)));
+141 | | }
+    | |_^
+
+error: macro-expanded `macro_export` macros from the current crate cannot be referred to by absolute paths
+   --> src/keyboard.rs:4:13
+    |
+  4 | use crate::{print, println};
+    |             ^^^^^
+    |
+    = warning: this was previously accepted by the compiler but is being phased out; it will become a hard error in a future release!
+    = note: for more information, see issue #52234 <https://github.com/rust-lang/rust/issues/52234>
+note: the macro is defined here
+   --> src/vga_buffer.rs:139:1
+    |
+139 | / macro_rules! print {
+140 | |     ($($arg:tt)*) => ($crate::vga_buffer::_print(format_args!($($arg)*)));
+141 | | }
+    | |_^
+
+error: macro-expanded `macro_export` macros from the current crate cannot be referred to by absolute paths
+   --> src/keyboard.rs:4:20
+    |
+  4 | use crate::{print, println};
+    |                    ^^^^^^^
+    |
+    = warning: this was previously accepted by the compiler but is being phased out; it will become a hard error in a future release!
+    = note: for more information, see issue #52234 <https://github.com/rust-lang/rust/issues/52234>
+note: the macro is defined here
+   --> src/vga_buffer.rs:144:1
+    |
+144 | / macro_rules! println {
+145 | |     () => ($crate::print!("\n"));
+146 | |     ($($arg:tt)*) => ($crate::print!("{}\n", format_args!($($arg)*)));
+147 | | }
+    | |_^
+
+warning: unused import: `spin::Mutex`
+ --> src/vga_buffer.rs:4:5
+  |
+4 | use spin::Mutex;
+  |     ^^^^^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: unused import: `uart_16550::SerialPort`
+ --> src/serial.rs:1:5
+  |
+1 | use uart_16550::SerialPort;
+  |     ^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused import: `spin::Mutex`
+ --> src/serial.rs:2:5
+  |
+2 | use spin::Mutex;
+  |     ^^^^^^^^^^^
+
+warning: unused import: `x86_64::VirtAddr`
+ --> src/gdt.rs:1:5
+  |
+1 | use x86_64::VirtAddr;
+  |     ^^^^^^^^^^^^^^^^
+
+warning: unused import: `x86_64::structures::tss::TaskStateSegment`
+ --> src/gdt.rs:2:5
+  |
+2 | use x86_64::structures::tss::TaskStateSegment;
+  |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused imports: `Descriptor` and `GlobalDescriptorTable`
+ --> src/gdt.rs:3:31
+  |
+3 | use x86_64::structures::gdt::{GlobalDescriptorTable, Descriptor, SegmentSelector};
+  |                               ^^^^^^^^^^^^^^^^^^^^^  ^^^^^^^^^^
+
+warning: unused import: `InterruptDescriptorTable`
+ --> src/interrupts.rs:1:31
+  |
+1 | use x86_64::structures::idt::{InterruptDescriptorTable, InterruptStackFrame, PageFaultErrorCode};
+  |                               ^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused import: `print`
+ --> src/interrupts.rs:3:22
+  |
+3 | use crate::{println, print};
+  |                      ^^^^^
+
+warning: unused import: `crate::gdt`
+ --> src/interrupts.rs:4:5
+  |
+4 | use crate::gdt;
+  |     ^^^^^^^^^^
+
+warning: unused import: `x86_64::registers::control::Cr2`
+  --> src/interrupts.rs:68:9
+   |
+68 |     use x86_64::registers::control::Cr2;
+   |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused imports: `HandleControl`, `Keyboard`, `ScancodeSet1`, and `layouts`
+ --> src/keyboard.rs:1:19
+  |
+1 | use pc_keyboard::{layouts, DecodedKey, HandleControl, Keyboard, ScancodeSet1};
+  |                   ^^^^^^^              ^^^^^^^^^^^^^  ^^^^^^^^  ^^^^^^^^^^^^
+
+warning: unused import: `spin::Mutex`
+ --> src/keyboard.rs:2:5
+  |
+2 | use spin::Mutex;
+  |     ^^^^^^^^^^^
+
+warning: unused import: `println`
+ --> src/keyboard.rs:4:20
+  |
+4 | use crate::{print, println};
+  |                    ^^^^^^^
+
+error[E0658]: the extern "x86-interrupt" ABI is experimental and subject to change
+  --> src/interrupts.rs:52:8
+   |
+52 | extern "x86-interrupt" fn breakpoint_handler(
+   |        ^^^^^^^^^^^^^^^
+   |
+   = note: see issue #40180 <https://github.com/rust-lang/rust/issues/40180> for more information
+   = help: add `#![feature(abi_x86_interrupt)]` to the crate attributes to enable
+   = note: this compiler was built on 2025-10-16; consider upgrading it if it is out of date
+
+error[E0658]: the extern "x86-interrupt" ABI is experimental and subject to change
+  --> src/interrupts.rs:58:8
+   |
+58 | extern "x86-interrupt" fn double_fault_handler(
+   |        ^^^^^^^^^^^^^^^
+   |
+   = note: see issue #40180 <https://github.com/rust-lang/rust/issues/40180> for more information
+   = help: add `#![feature(abi_x86_interrupt)]` to the crate attributes to enable
+   = note: this compiler was built on 2025-10-16; consider upgrading it if it is out of date
+
+error[E0658]: the extern "x86-interrupt" ABI is experimental and subject to change
+  --> src/interrupts.rs:64:8
+   |
+64 | extern "x86-interrupt" fn page_fault_handler(
+   |        ^^^^^^^^^^^^^^^
+   |
+   = note: see issue #40180 <https://github.com/rust-lang/rust/issues/40180> for more information
+   = help: add `#![feature(abi_x86_interrupt)]` to the crate attributes to enable
+   = note: this compiler was built on 2025-10-16; consider upgrading it if it is out of date
+
+error[E0658]: the extern "x86-interrupt" ABI is experimental and subject to change
+  --> src/interrupts.rs:77:8
+   |
+77 | extern "x86-interrupt" fn timer_interrupt_handler(
+   |        ^^^^^^^^^^^^^^^
+   |
+   = note: see issue #40180 <https://github.com/rust-lang/rust/issues/40180> for more information
+   = help: add `#![feature(abi_x86_interrupt)]` to the crate attributes to enable
+   = note: this compiler was built on 2025-10-16; consider upgrading it if it is out of date
+
+error[E0658]: the extern "x86-interrupt" ABI is experimental and subject to change
+  --> src/interrupts.rs:86:8
+   |
+86 | extern "x86-interrupt" fn keyboard_interrupt_handler(
+   |        ^^^^^^^^^^^^^^^
+   |
+   = note: see issue #40180 <https://github.com/rust-lang/rust/issues/40180> for more information
+   = help: add `#![feature(abi_x86_interrupt)]` to the crate attributes to enable
+   = note: this compiler was built on 2025-10-16; consider upgrading it if it is out of date
+
+Some errors have detailed explanations: E0425, E0658.
+For more information about an error, try `rustc --explain E0425`.
+warning: `ment_os` (lib) generated 13 warnings
+error: could not compile `ment_os` (lib) due to 25 previous errors; 13 warnings emitted
