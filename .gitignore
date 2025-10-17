@@ -1,1 +1,10 @@
 /target
+Cargo.lock
+*.bin
+*.img
+*.iso
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
